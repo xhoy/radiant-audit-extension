@@ -3,7 +3,7 @@ require_dependency 'application_controller'
 
 class AuditExtension < Radiant::Extension
   version "0.9"
-  description "Audit Extension- logs user actions in Radiant"
+  description "Audit Extension - logs user actions in Radiant"
   url "http://digitalpulp.com"
   
   extension_config do |ext|
@@ -40,8 +40,9 @@ class AuditExtension < Radiant::Extension
 
     AuditObserver.instance
 
-    admin.nav << Radiant::AdminUI::NavTab.new(:tools, "Tools") unless admin.nav[:tools]
-    admin.nav[:tools] << admin.nav_item("Audit Log", "Audit Log", "/admin/audits")
+    add_tab 'Tools' do
+      add_item 'Audit Log', '/admin/audits'
+    end
   end
   
   def deactivate
