@@ -9,7 +9,7 @@
           %span= params[:date].ago(1.day).strftime('%b %d')
         
       %li
-        = text_field_tag :date, params[:date].strftime('%m/%d/%Y'), :class => "AuditDatePicker"
+        = text_field_tag :date, params[:date].strftime('%B %d, %Y'), :class => "date"
         %label{ :for => "date", :class => "Invisible" } Date
         
       - if next_date = AuditEvent.date_after(params[:date])

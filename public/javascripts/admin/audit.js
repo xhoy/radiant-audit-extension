@@ -1,21 +1,3 @@
-// Subclass DatePicker behavior to override the widget positioning and perform
-// as an auto-submit field.
-var AuditDatePicker = Behavior.create(DatePicker, {
-	_positionWidget : function() {
-		var offset = this.element.cumulativeOffset();
-		this.nodes['widget'].setStyle({ "bottom" : "50px", "left" : offset[0] + "px" });
-	},
-	cellClickHandler : function(e, td_date) {
-		clearTimeout(this.hide_timeout);
-		e.stop();
-		this.element.value = td_date.format(this.CONFIG['field_date_format']);
-		this.hide();
-		this.element.form.submit();
-	}
-});
-// Steal the default CONIFG from the original DatePicker
-AuditDatePicker.CONFIG = DatePicker.CONFIG;
-
 // Generic Overlabel for in-field label
 var OverLabel = Behavior.create({
 	initialize : function(){
@@ -72,7 +54,6 @@ var AuditController = Behavior.create({
 
 // And add our behaviors
 Event.addBehavior({
-  ".AuditDatePicker" : AuditDatePicker,
 	".OverLabel" : OverLabel,
 	"#actions" : AuditController
 });
