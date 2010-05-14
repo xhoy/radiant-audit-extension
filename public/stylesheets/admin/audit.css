@@ -3,7 +3,7 @@
 .FormAction { padding-top: 5px; }
 .Invisible { display: none; }
 
-#audit_filter_form { background: #7E7E7E; display: none; }
+#audit_filter_form { background: #7E7E7E; display: none; -webkit-border-top-right-radius: 6px; -moz-border-radius-topright: 6px; }
 .Active #audit_filter_form { display: block; }
 
 #audit-results { margin: 0 0 5em !important; }
@@ -16,6 +16,6 @@
 
 #actions #remove-filters { background: none; color: #FFF; text-decoration: underline; padding: 0px; text-shadow: none; }
 
-#filtering-table { margin: 5px 15px; width: 100%; border: none; border-collapse: collapse; border-spacing: 0; }
-#filtering-table td { padding: 2px 5px !important; line-height: normal; }
-#filtering-options .FormAction { padding: 0 15px 1em; }
+#filtering-table { margin: 5px 15px 5px 6px; width: 100%; border: none; border-collapse: collapse; border-spacing: 0; }
+#filtering-table td { padding: 8px 5px 0 !important; line-height: normal; }
+#filtering-options .FormAction { padding: 0 15px 0.5em 10px; }
