@@ -1,14 +1,9 @@
-# Uncomment this if you reference any of your controllers in activate
 require_dependency 'application_controller'
 
 class AuditExtension < Radiant::Extension
   version "0.9"
   description "Audit Extension - logs user actions in Radiant"
   url "http://digitalpulp.com"
-  
-  extension_config do |ext|
-    ext.gem "will_paginate"
-  end
   
   define_routes do |map|
     map.namespace :admin do |admin|
@@ -46,7 +41,6 @@ class AuditExtension < Radiant::Extension
   end
   
   def deactivate
-    # admin.tabs.remove "Audit"
   end
   
 end

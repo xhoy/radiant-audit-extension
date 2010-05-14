@@ -37,18 +37,16 @@ var OverLabel = Behavior.create({
 
 var AuditController = Behavior.create({
 	initialize : function(){
-		this.date_filter_submit = $("date-filter-submit");
 		this.metadata_toggler = $("more-or-less-metadata");
 		this.metadata = $("filtering-options");
-		if (!this.date_filter_submit || !this.metadata_toggler || !this.metadata) return;
-		this.date_filter_submit.hide();
+		if (!this.metadata_toggler || !this.metadata) return;
 		this.metadata_toggler.observe("click", this.toggleFilteringOptions.bind(this));
 		if (document.location.href.indexOf("Filter") > -1)
 			this.toggleFilteringOptions();
 	},
 	toggleFilteringOptions : function(){
 		this.metadata.toggleClassName("Active");
-		this.metadata_toggler.update(this.metadata_toggler.innerHTML.indexOf("More") > -1 ? "Hide Filtering Options" : "More Filtering Options");
+		this.metadata_toggler.update(this.metadata_toggler.innerHTML.indexOf("Show") > -1 ? "Hide Filters" : "Show Filters");
 	}
 });
 

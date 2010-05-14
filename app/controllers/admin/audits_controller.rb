@@ -11,9 +11,7 @@ class Admin::AuditsController < ApplicationController
   
   private
     def include_assets
-      @stylesheets << 'admin/date_picker'
       @stylesheets << 'admin/audit'
-      @javascripts << 'admin/DatePicker'
       @javascripts << 'admin/audit'
     end
     
@@ -22,11 +20,15 @@ class Admin::AuditsController < ApplicationController
       filters.inject(AuditEvent) do |chain,filter|
         chain = chain.send(filter, params[filter]) unless params[filter].blank?
         chain
-      end.paginate(:page => params[:page], :order => "audit_events.created_at #{sort_direction}")
+      end.paginate(pagination_parameters)
     end
 
     def sort_direction
       params['direction'] == 'asc' ? 'asc' : 'desc'
+    end
+
+    def pagination_parameters
+      super.merge :per_page => AuditEvent.per_page, :order => "audit_events.created_at #{sort_direction}"
     end
   
 end
