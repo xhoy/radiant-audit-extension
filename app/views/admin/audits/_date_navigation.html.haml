@@ -1,4 +1,4 @@
-.pagination{:style => 'float: left;'}
+.pagination.by-date{:style => 'float:left'}
   - if previous_date = AuditEvent.date_before(params[:date])
     = link_to "&laquo; #{previous_date.strftime('%b %d')}", :overwrite_params => { :date => previous_date }
   - else

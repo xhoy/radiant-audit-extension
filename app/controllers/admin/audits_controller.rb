@@ -28,7 +28,11 @@ class Admin::AuditsController < ApplicationController
     end
 
     def pagination_parameters
-      super.merge :per_page => AuditEvent.per_page, :order => "audit_events.created_at #{sort_direction}"
+      { 
+        :per_page => AuditEvent.per_page,
+        :order => "audit_events.created_at #{sort_direction}",
+        :page => params[:p]
+      }
     end
   
 end
