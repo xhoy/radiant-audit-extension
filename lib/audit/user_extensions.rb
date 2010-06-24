@@ -33,6 +33,8 @@ module Audit
           "failed login attempt for " + link_to(h(event.auditable.name), event.auditable_path)
         end
 
+        named_scope :with_audited_events, :joins => 'INNER JOIN audit_events ON audit_events.user_id = users.id', :order => :login, :select => "DISTINCT(users.id), login"
+
       end
     end
 

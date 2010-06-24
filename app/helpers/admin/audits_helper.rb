@@ -1,11 +1,11 @@
 module Admin::AuditsHelper
 
   def audited_ip_addresses
-    @audited_ip_addresses ||= AuditEvent.find(:all, :select => :ip_address, :group => :ip_address).map(&:ip_address).compact
+    @audited_ip_addresses ||= AuditEvent.find(:all, :select => 'DISTINCT(ip_address)').map(&:ip_address).compact.sort
   end
 
   def audited_users
-    @audited_users ||= AuditEvent.find(:all, :group => :user_id, :include => :user, :order => 'users.login').map(&:user).compact
+    @audited_users ||= User.with_audited_events
   end
 
   def audited_event_types
