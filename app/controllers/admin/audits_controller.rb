@@ -1,5 +1,10 @@
 class Admin::AuditsController < ApplicationController
 
+  only_allow_access_to :index, :show, :new, :create, :edit, :update, :remove, :destroy,
+      :when => [:admin],
+      :denied_url => { :controller => 'admin/audit', :action => 'index' },
+      :denied_message => 'You must have administrator privileges to perform this action.'
+
   before_filter :include_assets
 
   def index
