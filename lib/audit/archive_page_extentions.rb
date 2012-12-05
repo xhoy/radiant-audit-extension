@@ -1,5 +1,5 @@
 module Audit
-  module ArchivePageExtensions
+  module ArchivePageExtentions 
 
     def self.included(base)
       base.class_eval do

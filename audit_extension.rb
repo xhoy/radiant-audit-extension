@@ -21,7 +21,7 @@ class AuditExtension < Radiant::Extension
   ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(AuditExtension::DATE_TIME_FORMATS)
   ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(AuditExtension::DATE_TIME_FORMATS)
   
-  OBSERVABLES = [User, Page, Layout, Snippet, Archive, ArchivePage]
+  OBSERVABLES = [User, Page, Layout, Snippet, ArchivePage, ArchiveMonthIndexPage, ArchiveDayIndexPage, ArchiveYearIndexPage]
   
   def activate
     require "audit"
@@ -29,11 +29,14 @@ class AuditExtension < Radiant::Extension
     [ApplicationController, *ApplicationController.descendants].each { |c| c.send :include, Audit::ApplicationExtensions }
     Admin::WelcomeController.send :include, Audit::WelcomeControllerExtensions
     Page.send :include, Audit::PageExtensions
-    Archive.send :include, Audit::ArchiveExtentions
     ArchivePage.send :include, Audit::ArchivePageExtentions
+    ArchiveMonthIndexPage.send :include, Audit::ArchivePageExtentions
+    ArchiveDayIndexPage.send :include, Audit::ArchivePageExtentions
+    ArchiveYearIndexPage.send :include, Audit::ArchivePageExtentions
     User.send :include, Audit::UserExtensions
     Snippet.send :include, Audit::SnippetExtensions
     Layout.send :include, Audit::LayoutExtensions
+
 
     AuditObserver.instance
 

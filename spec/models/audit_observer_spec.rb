@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe AuditObserver do
-  dataset :users, :pages_with_layouts, :snippets
+  dataset :users, :pages_with_layouts, :snippets, :archive_pages, :archive_pages , :archive_day_index_pages, :archive_index_tags_and_methods, :archive_year_index_pages
 
   before(:each) do
     @user = users(:existing)
@@ -88,25 +88,6 @@ describe AuditObserver do
       }.should change(AuditEvent, :count).by(1)
     end
   end
-  describe "Archive logging" do
-    it "should log create" do
-      lambda {
-        Archive.create!(archive_params)
-      }.should change(AuditEvent, :count).by(1)
-    end
-
-    it "should log update" do
-      lambda {
-        archives(:first).save
-      }.should change(AuditEvent, :count).by(1)
-    end
-
-    it "should log destroy" do
-      lambda {
-        archives(:first).destroy
-      }.should change(AuditEvent, :count).by(1)
-    end
-  end
   describe "ArchivePage logging" do
     it "should log create" do
       lambda {
@@ -123,6 +104,82 @@ describe AuditObserver do
     it "should log destroy" do
       lambda {
         archivepages(:first).destroy
+      }.should change(AuditEvent, :count).by(1)
+    end
+  end
+  describe "ArchiveMonthIndexPage logging" do
+    it "should log create" do
+      lambda {
+        ArchiveMonthIndexPage.create!(archivemonthindexpage_params)
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log update" do
+      lambda {
+        archivemonthindexpages(:first).save
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log destroy" do
+      lambda {
+        archivemonthindexpages(:first).destroy
+      }.should change(AuditEvent, :count).by(1)
+    end
+  end
+  describe "ArchiveDayIndexPage logging" do
+    it "should log create" do
+      lambda {
+        ArchiveDayIndexPage.create!(archivedayindexpage_params)
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log update" do
+      lambda {
+        archivedayindexpages(:first).save
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log destroy" do
+      lambda {
+        archivedayindexpages(:first).destroy
+      }.should change(AuditEvent, :count).by(1)
+    end
+  end
+  describe "ArchiveYearIndexPage logging" do
+    it "should log create" do
+      lambda {
+        ArchiveYearIndexPage.create!(archiveyearindexpage_params)
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log update" do
+      lambda {
+        archiveyearindexpages(:first).save
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log destroy" do
+      lambda {
+        archiveyearindexpages(:first).destroy
+      }.should change(AuditEvent, :count).by(1)
+    end
+  end
+  describe "ArchiveIndexTagsAndMethods logging" do
+    it "should log create" do
+      lambda {
+        ArchiveIndexTagsAndMethods.create!(archiveindextagsandmethods_params)
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log update" do
+      lambda {
+        archiveindextagsandmethods(:first).save
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log destroy" do
+      lambda {
+        archiveindextagsandmethods(:first).destroy
       }.should change(AuditEvent, :count).by(1)
     end
   end
