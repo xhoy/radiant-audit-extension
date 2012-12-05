@@ -88,5 +88,45 @@ describe AuditObserver do
       }.should change(AuditEvent, :count).by(1)
     end
   end
+  describe "Archive logging" do
+    it "should log create" do
+      lambda {
+        Archive.create!(archive_params)
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log update" do
+      lambda {
+        archives(:first).save
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log destroy" do
+      lambda {
+        archives(:first).destroy
+      }.should change(AuditEvent, :count).by(1)
+    end
+  end
+  describe "ArchivePage logging" do
+    it "should log create" do
+      lambda {
+        ArchivePage.create!(archivepage_params)
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log update" do
+      lambda {
+        archivepages(:first).save
+      }.should change(AuditEvent, :count).by(1)
+    end
+
+    it "should log destroy" do
+      lambda {
+        archivepages(:first).destroy
+      }.should change(AuditEvent, :count).by(1)
+    end
+  end
+
+
 
 end
